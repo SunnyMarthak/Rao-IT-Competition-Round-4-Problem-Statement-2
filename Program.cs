@@ -1,30 +1,35 @@
-﻿int n = Convert.ToInt32(Console.ReadLine());
-Dictionary<string, string> dctSF = new Dictionary<string, string>();
-for(int i = 0; i < n; i++)
+﻿using (StreamReader sr = new StreamReader("../../../Input.txt"))
 {
-    string key = Console.ReadLine();
-    string value = Console.ReadLine();
-    dctSF.Add(key, value);
-}
-foreach (KeyValuePair<string, string> kvp in dctSF)
-{
-    string S = kvp.Key;
-    string F = kvp.Value;
-    List<int> lstOperationSize = new List<int>();
-    foreach (char s in S)
+    int n = Convert.ToInt32(sr.ReadLine());
+    while (n-- > 0)
     {
-        List<int> lstOperations = new List<int>();
-        foreach (char f in F)
+        string S = sr.ReadLine();
+        string F = sr.ReadLine();
+        List<int> lstOperationSize = new List<int>();
+        foreach (char s in S)
         {
-            lstOperations.Add(Math.Abs(Convert.ToInt32(f) - Convert.ToInt32(s)));
+            List<int> lstOperations = new List<int>();
+            foreach (char f in F)
+            {
+                int Count = Math.Abs(Convert.ToInt32(f) - Convert.ToInt32(s));
+                int ReverseCount = 26 - Count;
+                if (Count > ReverseCount)
+                {
+                    lstOperations.Add(ReverseCount);
+                }
+                else
+                {
+                    lstOperations.Add(Count);
+                }
+            }
+            lstOperations.Sort();
+            lstOperationSize.Add(lstOperations.First());
         }
-        lstOperations.Sort();
-        lstOperationSize.Add(lstOperations.First());
+        int Sum = 0;
+        for (int i = 0; i < lstOperationSize.Count; i++)
+        {
+            Sum += lstOperationSize[i];
+        }
+        Console.WriteLine(Sum);
     }
-    int Sum = 0;
-    for (int i = 0; i < lstOperationSize.Count; i++)
-    {
-        Sum += lstOperationSize[i];
-    }
-    Console.WriteLine(Sum);
 }

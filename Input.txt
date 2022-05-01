@@ -1,7 +1,3 @@
-3
-pqrst
-ou
-abd
-abd
-aaaaaaaaaaaaaaab
-aceg
+1
+abcd
+a
